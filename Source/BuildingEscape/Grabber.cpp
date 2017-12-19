@@ -61,11 +61,11 @@ void UGrabber::Grab()
 	/// if we hit something then attach a physics handle
 	if (ActorHit != nullptr)
 	{
-		PhysicsHandle->GrabComponent(
+		PhysicsHandle->GrabComponentAtLocationWithRotation(
 			ComponentToGrab,
 			NAME_None, /// no bones needed
 			ComponentToGrab->GetOwner()->GetActorLocation(),
-			true // allow rotastion
+			ComponentToGrab->GetOwner()->GetActorRotation()
 		);
 	}
 }
@@ -109,7 +109,6 @@ const FHitResult UGrabber::GetFirstPhysicsBodyinReach()
 	);
 	return HitResult;
 }
-
 
 
 FVector UGrabber::GetReachLineStart()
