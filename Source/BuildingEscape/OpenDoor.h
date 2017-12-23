@@ -7,7 +7,10 @@
 #include "Engine/TriggerVolume.h"
 #include "OpenDoor.generated.h"
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+// BluePrint Class
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnOpenRequest);
+
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BUILDINGESCAPE_API UOpenDoor : public UActorComponent
 {
 	GENERATED_BODY()
@@ -26,6 +29,10 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	// Definition Event new Blueprint Class
+	UPROPERTY(BlueprintAssignable)
+	FOnOpenRequest OnOpenRequest;
 
 private:
 	UPROPERTY(VisibleAnywhere)

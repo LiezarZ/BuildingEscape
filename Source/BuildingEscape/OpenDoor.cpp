@@ -31,10 +31,13 @@ void UOpenDoor::BeginPlay()
 void UOpenDoor::OpenDoor()
 {
 	// Create a rotator
-	FRotator NewRotation = FRotator(0.f, OpenAngle, 0.f);
+	// FRotator NewRotation = FRotator(0.f, OpenAngle, 0.f);
+
+	// Open with new Blueprint class
+	OnOpenRequest.Broadcast();
 
 	// Set the door rotation
-	Owner->SetActorRotation(NewRotation);
+	//Owner->SetActorRotation(NewRotation);
 }
 
 void UOpenDoor::CloseDoor()
@@ -53,7 +56,7 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// Poll the Trigger Volume every frame
-	if (GetTotalMassOfActorsOnPlate() > 30.f) // TODO make into a paramter
+	if (GetTotalMassOfActorsOnPlate() > 20.f) // TODO make into a paramter
 	{
 		// then we will open the door
 		OpenDoor();
